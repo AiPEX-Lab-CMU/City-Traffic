@@ -26,8 +26,8 @@ public class CarPrimitiveAI : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Person"))
         {
-            //wm.CarStop();
-            //numberOfPeople++;
+            wm.CarStop();
+            numberOfPeople++;
         }
 
     }
@@ -37,9 +37,9 @@ public class CarPrimitiveAI : MonoBehaviour
 
         if (other.gameObject.CompareTag("Person"))
         {
-            //numberOfPeople--;
-            //if(numberOfPeople == 0)
-                //wm.CarGo();
+            numberOfPeople--;
+            if(numberOfPeople == 0)
+                wm.CarGo();
         }
 
 
