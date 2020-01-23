@@ -26,16 +26,13 @@ public class WaypointMovement : MonoBehaviour
 
     LineRenderer lineDraw;
 
-    Stopwatch stopwatch;
-
-    bool timerStopped;
+    /* Boolean showing if the pedestrian is waiting for traffic light */
+    public bool waitingForTrafficLight;
 
     // Start is called before the first frame update
     void Start()
     {
-        timerStopped = false;
-
-        stopwatch = new Stopwatch();
+        waitingForTrafficLight = false;
 
         currentTarget = wayPoints[waypointCounter];
 
@@ -124,6 +121,7 @@ public class WaypointMovement : MonoBehaviour
         {
             if(thisType == TypeOfObject.Person)
                 shouldMove = t.peopleCanWalk;
+                waitingForTrafficLight = t.peopleCanWalk;
 
             if (thisType == TypeOfObject.Car)
                 shouldMove = t.carsCanGo;
@@ -132,30 +130,5 @@ public class WaypointMovement : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        GameObject collided = other.gameObject;
-        if(collided.name == "Traffic_Light_5")
-        {
-            UnityEngine.Debug.Log("Start timing");
-            //this.stopwatch.Start();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other)
-        {
-            GameObject collided = other.gameObject;
-            if (collided.name == "Traffic_Light_6" && !timerStopped)
-            {
-                UnityEngine.Debug.Log("Stop timing");
-                //this.stopwatch.Stop();
-                //SendMessage messageSender = (SendMessage)GameObject.Find("messageSender").GetComponent(typeof(SendMessage));
-                //messageSender.sendBytes("003", stopwatch.Elapsed.TotalMilliseconds.ToString());
-                timerStopped = !timerStopped;
-            }
-        }
-    }
 
 }

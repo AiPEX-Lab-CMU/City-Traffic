@@ -24,9 +24,10 @@ public class CarPrimitiveAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        /* Register pedestrian encountered */
         if (other.gameObject.CompareTag("Person"))
         {
-            wm.CarStop();
+            wm.AddPedestrian(other.gameObject);
             numberOfPeople++;
         }
 
@@ -34,9 +35,10 @@ public class CarPrimitiveAI : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-
+        /* Deregister pedestrian */
         if (other.gameObject.CompareTag("Person"))
         {
+            wm.RemovePedestrian(other.gameObject);
             numberOfPeople--;
             if(numberOfPeople == 0)
                 wm.CarGo();
