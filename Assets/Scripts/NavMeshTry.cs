@@ -181,7 +181,7 @@ public class NavMeshTry : MonoBehaviour
             if (randomWalking)
                 index = Random.Range(0, 100) % (wayPoints.Count - 1);
             else
-                index++;
+                index = (index + 1) % (wayPoints.Count - 1);
             UnityEngine.Debug.Log("Waypoint " + index.ToString() + " is chosen");
             agent.destination = wayPoints[index].position;
         }
